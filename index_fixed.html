@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Something For You ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Georgia,serif;
+    background:linear-gradient(135deg,#fff0f5,#ffe4ec,#fff7fa);
+    color:#5a2638;
+    min-height:100vh;
+    overflow-x:hidden
+}
+.heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:20px;
+    animation:floatUp 7s linear infinite;
+    opacity:.7;
+    pointer-events:none;
+    z-index:1
+}
+@keyframes floatUp{
+    0%{transform:translateY(0) rotate(0);opacity:0}
+    20%{opacity:.8}
+    100%{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+.page{
+    display:none;
+    min-height:100vh;
+    padding:30px 20px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    z-index:2
+}
+.page.active{display:flex;animation:fadeIn .8s ease}
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+.container{width:100%;max-width:650px}
+.small-text{
+    font-size:15px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+    color:#a05270
+}
+h1{font-size:42px;margin-bottom:15px}
+.subtitle{
+    font-size:18px;
+    line-height:1.7;
+    margin-bottom:35px
+}
+.gift-area{
+    margin:30px auto;
+    cursor:pointer;
+    width:180px;
+    height:160px;
+    position:relative;
+    animation:bounce 2s infinite
+}
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+.gift-box{
+    position:absolute;
+    width:140px;
+    height:95px;
+    background:#d94f70;
+    bottom:0;
+    left:20px;
+    border-radius:5px;
+    box-shadow:0 10px 25px rgba(130,40,70,.25)
+}
+.gift-box:before{
+    content:"";
+    position:absolute;
+    width:25px;
+    height:95px;
+    background:#f8c5d2;
+    left:58px
+}
+.gift-lid{
+    position:absolute;
+    width:155px;
+    height:30px;
+    background:#c93e61;
+    left:12px;
+    bottom:85px;
+    border-radius:5px
+}
+.gift-lid:before{
+    content:"";
+    position:absolute;
+    width:25px;
+    height:30px;
+    background:#f8c5d2;
+    left:65px
+}
+.ribbon{
+    position:absolute;
+    width:55px;
+    height:30px;
+    border:8px solid #f8c5d2;
+    border-radius:50%;
+    top:-20px
+}
+.ribbon.left{left:40px;transform:rotate(-25deg)}
+.ribbon.right{right:40px;transform:rotate(25deg)}
+.click-text{margin-top:20px;font-style:italic;color:#9c4966}
+.btn{
+    border:none;
+    padding:13px 27px;
+    border-radius:30px;
+    background:#c94f70;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin:8px;
+    box-shadow:0 7px 18px rgba(170,50,90,.25);
+    transition:.3s
+}
+.btn:hover{transform:translateY(-3px);background:#ad3d5c}
+.btn.secondary{background:#fff;color:#a13d5d;border:1px solid #edb5c5}
+.letter{
+    background:#fffaf5;
+    padding:35px 28px;
+    border-radius:8px;
+    box-shadow:0 15px 40px rgba(100,40,60,.15);
+    text-align:left;
+    position:relative;
+    border:1px solid #f2d5dc
+}
+.letter:before{
+    content:"♥";
+    position:absolute;
+    top:15px;
+    right:20px;
+    color:#d95a78;
+    font-size:25px
+}
+.letter h2{text-align:center;margin-bottom:25px;font-size:28px}
+.letter p{line-height:1.9;font-size:16px;margin-bottom:15px}
+.signature{text-align:right;font-style:italic;margin-top:25px}
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin:25px 0
+}
+.memory{
+    height:200px;
+    border-radius:15px;
+    overflow:hidden;
+    background:#f8cbd7;
+    box-shadow:0 8px 20px rgba(100,40,60,.15);
+    position:relative
+}
+.memory img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s
+}
+.memory:hover img{transform:scale(1.08)}
+.memory span{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:10px;
+    background:linear-gradient(transparent,rgba(0,0,0,.6));
+    color:white;
+    font-size:14px
+}
+.flower-area{
+    margin:25px auto;
+    height:280px;
+    position:relative
+}
+.flower{
+    position:absolute;
+    font-size:70px;
+    animation:sway 3s ease-in-out infinite
+}
+.flower:nth-child(1){left:20%;top:50px}
+.flower:nth-child(2){left:43%;top:10px;animation-delay:.5s}
+.flower:nth-child(3){right:18%;top:60px;animation-delay:1s}
+@keyframes sway{
+    0%,100%{transform:rotate(-5deg)}
+    50%{transform:rotate(8deg)}
+}
+.flower-message{
+    font-size:18px;
+    line-height:1.8;
+    max-width:500px;
+    margin:auto
+}
+.final-box{
+    padding:40px 25px;
+    background:rgba(255,255,255,.65);
+    border-radius:25px;
+    box-shadow:0 15px 45px rgba(100,40,60,.12)
+}
+.final-heart{
+    font-size:75px;
+    animation:heartbeat 1.3s infinite;
+    margin-bottom:20px
+}
+@keyframes heartbeat{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.15)}
+}
+.final-box h2{font-size:32px;margin-bottom:20px}
+.final-box p{font-size:18px;line-height:1.9}
+.music-btn{
+    position:fixed;
+    right:18px;
+    top:18px;
+    z-index:10;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:none;
+    background:#c94f70;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(100,30,50,.25)
+}
+@media(max-width:600px){
+    h1{font-size:32px}
+    .subtitle{font-size:16px}
+    .letter{padding:28px 20px}
+    .memory-grid{grid-template-columns:1fr}
+    .memory{height:240px}
+    .flower{font-size:55px}
+}
+</style>
+</head>
+
+<body>
+
+<button class="music-btn" onclick="toggleMusic()" id="musicButton">🎵</button>
+
+<section class="page active" id="page1">
+<div class="container">
+<div class="small-text">A LITTLE SURPRISE FOR YOU</div>
+
+<!-- EDIT HERE: TITLE -->
+<h1>For Someone Special ❤️</h1>
+
+<p class="subtitle">
+I made something small for you.<br>
+Take your time and open it slowly.
+</p>
+
+<div class="gift-area" onclick="nextPage(2)">
+<div class="ribbon left"></div>
+<div class="ribbon right"></div>
+<div class="gift-lid"></div>
+<div class="gift-box"></div>
+</div>
+
+<div class="click-text">✨ Tap the gift to open ✨</div>
+</div>
+</section>
+
+<section class="page" id="page2">
+<div class="container">
+<div class="letter">
+
+<!-- EDIT HERE: LETTER TITLE -->
+<h2>My Letter For You 💌</h2>
+
+<!-- EDIT HERE: YOUR LETTER -->
+<p>Dear you,</p>
+
+<p>
+I don't always know how to say everything
+that I feel, so I decided to put some of
+my thoughts here instead.
+</p>
+
+<p>
+Thank you for being someone who makes
+ordinary moments feel a little more
+special. Every conversation, every laugh,
+and every little memory means more to me
+than you probably realize.
+</p>
+
+<p>
+I hope whenever you see this little page,
+you remember that someone is always
+wishing the best for you.
+</p>
+
+<p class="signature">
+With love,<br>
+<strong>Someone who cares ❤️</strong>
+</p>
+
+</div>
+
+<button class="btn secondary" onclick="nextPage(1)">← Back</button>
+<button class="btn" onclick="nextPage(3)">Our Memories →</button>
+</div>
+</section>
+
+<section class="page" id="page3">
+<div class="container">
+
+<div class="small-text">LITTLE MOMENTS</div>
+<h1>Our Memories 📸</h1>
+
+<p class="subtitle">
+Some moments are too beautiful to forget.
+</p>
+
+<div class="memory-grid">
+
+<!-- REPLACE THESE IMAGE URLS WITH YOUR OWN PHOTOS -->
+
+<div class="memory">
+<img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=700&q=80">
+<span>One beautiful moment ❤️</span>
+</div>
+
+<div class="memory">
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=700&q=80">
+<span>A memory worth keeping ✨</span>
+</div>
+
+<div class="memory">
+<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=700&q=80">
+<span>Another little memory 🌷</span>
+</div>
+
+<div class="memory">
+<img src="https://images.unsplash.com/photo-1501901609772-df0848060b33?auto=format&fit=crop&w=700&q=80">
+<span>Moments I treasure 💕</span>
+</div>
+
+</div>
+
+<button class="btn secondary" onclick="nextPage(2)">← Back</button>
+<button class="btn" onclick="nextPage(4)">A Flower For You 🌷</button>
+</div>
+</section>
+
+<section class="page" id="page4">
+<div class="container">
+
+<div class="small-text">JUST FOR YOU</div>
+<h1>A Little Flower 🌷</h1>
+
+<div class="flower-area">
+<div class="flower">🌷</div>
+<div class="flower">🌹</div>
+<div class="flower">🌸</div>
+</div>
+
+<!-- EDIT HERE -->
+<p class="flower-message">
+If I could give you flowers every time
+you made me smile, you'd have a garden
+by now. 🌷
+</p>
+
+<br>
+
+<button class="btn secondary" onclick="nextPage(3)">← Back</button>
+<button class="btn" onclick="nextPage(5)">One Last Thing ❤️</button>
+</div>
+</section>
+
+<section class="page" id="page5">
+<div class="container">
+
+<div class="final-box">
+
+<div class="final-heart">❤️</div>
+
+<!-- EDIT HERE -->
+<h2>Thank You For Being You</h2>
+
+<!-- EDIT HERE -->
+<p>
+No matter where life takes us,
+I hope you always remember that
+you are special, appreciated,
+and loved.
+</p>
+
+<br>
+
+<!-- EDIT HERE -->
+<p>
+This little website may be simple,
+but every word here was made with
+a genuine heart.
+</p>
+
+<br>
+
+<strong>Made especially for you. ✨</strong>
+
+</div>
+
+<br>
+
+<button class="btn secondary" onclick="nextPage(1)">
+Start Again ↻
+</button>
+
+</div>
+</section>
+
+<!-- OPTIONAL MUSIC
+Put your music file in the same Spck project folder,
+then uncomment this line:
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+-->
+
+<audio id="music" loop preload="auto">
+    <source src="./until_I_found_u.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function nextPage(pageNumber){
+    document.querySelectorAll(".page").forEach(function(page){
+        page.classList.remove("active");
+    });
+
+    document.getElementById("page" + pageNumber).classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.className="heart";
+
+    const hearts=["❤️","💕","💗","💖","💓"];
+    heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(5+Math.random()*5)+"s";
+    heart.style.fontSize=(14+Math.random()*16)+"px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+        heart.remove();
+    },10000);
+}
+
+setInterval(createHeart,800);
+
+let musicPlaying=false;
+
+function toggleMusic(){
+    const music=document.getElementById("music");
+    const button=document.getElementById("musicButton");
+
+    if(musicPlaying){
+        music.pause();
+        button.innerHTML="🎵";
+        musicPlaying=false;
+    }else{
+        music.play().then(function(){
+            button.innerHTML="⏸️";
+            musicPlaying=true;
+        }).catch(function(error){
+            console.log("Audio playback error:", error);
+            button.innerHTML="🎵";
+            musicPlaying=false;
+        });
+    }
+}
+
+document.addEventListener("click",function(e){
+
+    if(
+        e.target.tagName==="BUTTON" ||
+        e.target.classList.contains("gift-area")
+    ){
+
+        for(let i=0;i<5;i++){
+
+            const heart=document.createElement("div");
+
+            heart.innerHTML="💗";
+            heart.style.position="fixed";
+            heart.style.left=e.clientX+"px";
+            heart.style.top=e.clientY+"px";
+            heart.style.pointerEvents="none";
+            heart.style.fontSize="20px";
+            heart.style.zIndex="999";
+
+            document.body.appendChild(heart);
+
+            const x=(Math.random()-.5)*150;
+            const y=(Math.random()-.5)*150;
+
+            heart.animate(
+                [
+                    {
+                        transform:"translate(0,0)",
+                        opacity:1
+                    },
+                    {
+                        transform:`translate(${x}px,${y}px)`,
+                        opacity:0
+                    }
+                ],
+                {
+                    duration:900,
+                    easing:"ease-out"
+                }
+            );
+
+            setTimeout(function(){
+                heart.remove();
+            },900);
+        }
+    }
+});
+</script>
+
+</body>
+</html>
